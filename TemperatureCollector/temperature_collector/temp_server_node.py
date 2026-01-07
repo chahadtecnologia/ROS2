@@ -16,7 +16,7 @@ class TempServerNode(Node):
 
         self.get_logger().info("Temperature server started. Collecting every 10s...")
 
-    def listener_callback(self, msg):
+    def listener_callback(self, msg: TemperatureCollector):
         self.current_msg = msg
 
     def callback_temp_server(self):
