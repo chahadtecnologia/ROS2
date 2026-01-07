@@ -1,1 +1,1 @@
-# Repository dedicated to ROS2 Applications
+# Repository dedicated to ROS2 (Robot Operating System 2) Applications
