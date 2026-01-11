@@ -7,7 +7,7 @@ from temperature_collector_interfaces.msg import TemperatureCollector
 class TempCollectorNode(Node):
     def __init__(self):
         super().__init__("temp_collector_node")
-        self.temp_collector_publisher_ = self.create_publisher(TemperatureCollector, "temp_collector_msg", 10)
+        self.temp_collector_publisher_ = self.create_publisher(TemperatureCollector, "/temp_collector_msg", 10)
         self.timer_ = self.create_timer(10.0, self.extract_temp_collector)
         self.get_logger().info("Temperature Collector publisher has been started...")
 

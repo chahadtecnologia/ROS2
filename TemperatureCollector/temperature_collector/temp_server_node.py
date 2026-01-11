@@ -7,8 +7,8 @@ class TempServerNode(Node):
     def __init__(self):
         super().__init__("temp_server_node")
         self.current_msg = None
-        self.temp_server_subscription_ = self.create_subscription(TemperatureCollector, "temp_collector_msg", self.listener_callback, 10)
-        self.temp_server_publisher_ = self.create_publisher(TemperatureCollector, "temp_sender_msg", 10)
+        self.temp_server_subscription_ = self.create_subscription(TemperatureCollector, "/temp_collector_msg", self.listener_callback, 10)
+        self.temp_server_publisher_ = self.create_publisher(TemperatureCollector, "/temp_sender_msg", 10)
         self.timer_ = self.create_timer(10.0, self.callback_temp_server)
 
         self.declare_parameter("city1", "São Paulo")
