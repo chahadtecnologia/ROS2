@@ -1,3 +1,3 @@
-float64 temperature_saopaulo
-float64 temperature_santoandre
-float64 temperature_campinas
+float64 temperature_city1
+float64 temperature_city2
+float64 temperature_city3

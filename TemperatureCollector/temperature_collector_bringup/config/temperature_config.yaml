@@ -1,0 +1,9 @@
+/temp_collector_node:
+  ros__parameters:
+    cities: ["São Paulo", "Santo André", "Campinas"]
+
+/temp_server_node:
+  ros__parameters:
+    city1: "São Paulo"
+    city2: "Santo André"
+    city3: "Campinas"

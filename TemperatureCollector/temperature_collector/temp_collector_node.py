@@ -17,7 +17,7 @@ class TempCollectorNode(Node):
         results = {}
 
         for city in cities:
-            url = f"<OPEN_WEATHER_MAP_ENDPOINT>"
+            url = f"<WEATHER_APP_URL>"
             try:
                 response = requests.get(url)
                 data = response.json()
@@ -35,12 +35,12 @@ class TempCollectorNode(Node):
         
         if temperatures:
             msg = TemperatureCollector()
-            msg.temperature_saopaulo = temperatures.get("São Paulo", 0.0)
-            msg.temperature_santoandre = temperatures.get("Santo André", 0.0)
-            msg.temperature_campinas = temperatures.get("Campinas", 0.0)
+            msg.temperature_city1 = temperatures.get("São Paulo", 0.0)
+            msg.temperature_city2 = temperatures.get("Santo André", 0.0)
+            msg.temperature_city3 = temperatures.get("Campinas", 0.0)
             
             self.temp_collector_publisher_.publish(msg)
-            self.get_logger().info(f"Temperature Collected: São Paulo: {msg.temperature_saopaulo} | Santo André: {msg.temperature_santoandre} | Campinas: {msg.temperature_campinas}")
+            self.get_logger().info(f"Temperature Collected: São Paulo: {msg.temperature_city1} | Santo André: {msg.temperature_city2} | Campinas: {msg.temperature_city3}")
 
 def main(args=None):
     rclpy.init(args=args)

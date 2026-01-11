@@ -26,9 +26,9 @@ class TempServerNode(Node):
             self.city2_name_ = self.get_parameter("city2").value
             self.city3_name_ = self.get_parameter("city3").value
             
-            self.get_logger().info("Temperature Collected: " + self.city1_name_ + ": " + str(self.current_msg.temperature_saopaulo) 
-                                                             + " | " + self.city2_name_ + ": " + str(self.current_msg.temperature_santoandre) 
-                                                             + " | " + self.city3_name_ + ": " + str(self.current_msg.temperature_campinas))
+            self.get_logger().info("Temperature Collected: " + self.city1_name_ + ": " + str(self.current_msg.temperature_city1) 
+                                                             + " | " + self.city2_name_ + ": " + str(self.current_msg.temperature_city2) 
+                                                             + " | " + self.city3_name_ + ": " + str(self.current_msg.temperature_city3))
             
             self.get_logger().info(f"Publishing temperatures to the clients...")
             self.temp_server_publisher_.publish(self.current_msg)
