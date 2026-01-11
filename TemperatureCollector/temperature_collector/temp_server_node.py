@@ -6,8 +6,9 @@ from temperature_collector_interfaces.msg import TemperatureCollector
 class TempServerNode(Node):
     def __init__(self):
         super().__init__("temp_server_node")
-        self.current_msg_ = None
+        self.current_msg = None
         self.temp_server_subscription_ = self.create_subscription(TemperatureCollector, "temp_collector_msg", self.listener_callback, 10)
+        self.temp_server_publisher_ = self.create_publisher(TemperatureCollector, "temp_sender_msg", 10)
         self.timer_ = self.create_timer(10.0, self.callback_temp_server)
 
         self.declare_parameter("city1", "São Paulo")
@@ -28,8 +29,13 @@ class TempServerNode(Node):
             self.get_logger().info("Temperature Collected: " + self.city1_name_ + ": " + str(self.current_msg.temperature_saopaulo) 
                                                              + " | " + self.city2_name_ + ": " + str(self.current_msg.temperature_santoandre) 
                                                              + " | " + self.city3_name_ + ": " + str(self.current_msg.temperature_campinas))
+            
+            self.get_logger().info(f"Publishing temperatures to the clients...")
+            self.temp_server_publisher_.publish(self.current_msg)
+
         else:
             self.get_logger().info("No data received yet...")
+
  
 def main(args=None):
     rclpy.init(args=args)
