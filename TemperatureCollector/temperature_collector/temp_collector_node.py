@@ -11,13 +11,22 @@ class TempCollectorNode(Node):
         self.timer_ = self.create_timer(10.0, self.extract_temp_collector)
         self.get_logger().info("Temperature Collector publisher has been started...")
 
+        self.declare_parameter("city1", "São Paulo")
+        self.declare_parameter("city2", "Santo André")
+        self.declare_parameter("city3", "Campinas")
+
     def get_weather_data(self):
+
+        self.city1_name_ = self.get_parameter("city1").value
+        self.city2_name_ = self.get_parameter("city2").value
+        self.city3_name_ = self.get_parameter("city3").value
+
         api_key = "<API_TOKEN>"
-        cities = ["São Paulo", "Santo André", "Campinas"]
+        cities = [self.city1_name_, self.city2_name_, self.city3_name_]
         results = {}
 
         for city in cities:
-            url = f"<WEATHER_APP_URL>"
+            url = f"<WEATHER_MAP_URL>"
             try:
                 response = requests.get(url)
                 data = response.json()
@@ -32,15 +41,21 @@ class TempCollectorNode(Node):
 
     def extract_temp_collector(self):
         temperatures = self.get_weather_data()
+
+        self.city1_name_ = self.get_parameter("city1").value
+        self.city2_name_ = self.get_parameter("city2").value
+        self.city3_name_ = self.get_parameter("city3").value
         
         if temperatures:
             msg = TemperatureCollector()
-            msg.temperature_city1 = temperatures.get("São Paulo", 0.0)
-            msg.temperature_city2 = temperatures.get("Santo André", 0.0)
-            msg.temperature_city3 = temperatures.get("Campinas", 0.0)
+            msg.temperature_city1 = temperatures.get(self.city1_name_, 0.0)
+            msg.temperature_city2 = temperatures.get(self.city2_name_, 0.0)
+            msg.temperature_city3 = temperatures.get(self.city3_name_, 0.0)
             
             self.temp_collector_publisher_.publish(msg)
-            self.get_logger().info(f"Temperature Collected: São Paulo: {msg.temperature_city1} | Santo André: {msg.temperature_city2} | Campinas: {msg.temperature_city3}")
+            self.get_logger().info("Temperature Collected: " + self.city1_name_ + ": " + str(msg.temperature_city1) + " | " 
+                                                             + self.city2_name_ + ": " + str(msg.temperature_city2) + " | "
+                                                             + self.city3_name_ + ": " + str(msg.temperature_city3))
 
 def main(args=None):
     rclpy.init(args=args)
