@@ -4,7 +4,7 @@ from rclpy.node import Node
 from temperature_collector_interfaces.msg import TemperatureCollector 
 from temperature_collector_interfaces.srv import TemperatureService
  
-class ClientCity1Node(Node):
+class ClientCity2Node(Node):
     def __init__(self):
         super().__init__("client_city2_node")
         self.current_msg = None
@@ -49,7 +49,7 @@ class ClientCity1Node(Node):
  
 def main(args=None):
     rclpy.init(args=args)
-    node = ClientCity1Node()
+    node = ClientCity2Node()
     rclpy.spin(node)
     rclpy.shutdown()
  
