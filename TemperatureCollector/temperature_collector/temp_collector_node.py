@@ -33,9 +33,9 @@ class TempCollectorNode(Node):
                 if response.status_code == 200:
                     results[city] = data['main']['temp']
                 else:
-                    self.get_logger().error(f"Erro em {city}: {data.get('message')}")
+                    self.get_logger().error(f"Error in {city}: {data.get('message')}")
             except Exception as e:
-                self.get_logger().error(f"Erro de conexão em {city}: {e}")
+                self.get_logger().error(f"Conection error in {city}: {e}")
         
         return results
 
@@ -53,7 +53,7 @@ class TempCollectorNode(Node):
             msg.temperature_city3 = temperatures.get(self.city3_name_, 0.0)
             
             self.temp_collector_publisher_.publish(msg)
-            self.get_logger().info("Temperature Collected: " + self.city1_name_ + ": " + str(msg.temperature_city1) + " | " 
+            self.get_logger().info("Temperature Collected by Message Interface: " + self.city1_name_ + ": " + str(msg.temperature_city1) + " | " 
                                                              + self.city2_name_ + ": " + str(msg.temperature_city2) + " | "
                                                              + self.city3_name_ + ": " + str(msg.temperature_city3))
 
