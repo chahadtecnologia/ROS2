@@ -1,5 +1,5 @@
 # Temperature Collector using ROS2
 
 <div align="center">
-  <img src="TemperatureCollectorROS2.png" alt="Temperature Collector" width="500">
+  <img src="TemperatureCollectorROS2.png" alt="Temperature Collector" width="5000">
 </div>
