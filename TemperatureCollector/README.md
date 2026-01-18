@@ -1,4 +1,4 @@
-# Temperature Collector using ROS2
+# Temperature Collector project using ROS2
 
 <div align="center">
   <img src="TemperatureCollectorROS2.png" alt="Temperature Collector" width="10000">
