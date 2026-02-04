@@ -8,7 +8,10 @@ import os
 def generate_launch_description():
 
     urdf_path = os.path.join(get_package_share_path('my_robot_magus_description'),
-                             'urdf', 'my_robot_magus.urdf')
+                             'urdf', 'my_robot_magus.xacro')
+    
+    rviz_config_path = os.path.join(get_package_share_path('my_robot_magus_description'),
+                             'rviz', 'urdf_config.rviz')
     
     robot_description = ParameterValue(Command(['xacro ', urdf_path]), value_type=str)
 
@@ -25,7 +28,8 @@ def generate_launch_description():
 
     rviz2_node = Node(
         package="rviz2",
-        executable="rviz2"
+        executable="rviz2",
+        arguments=['-d', rviz_config_path]
     )
 
     return LaunchDescription([
